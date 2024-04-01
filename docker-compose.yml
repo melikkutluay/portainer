@@ -1,0 +1,23 @@
+version: '3.5'
+services:
+  portainer_sybase:
+    image: nguoianphu/docker-sybase
+    container_name: portainer_syabase
+    hostname: ase-server
+    working_dir: /home/sybase
+    volumes:
+      - sybase-data:/data
+    ports:
+      - 5001:5000
+    tty: true
+    entrypoint: "/home/sybase/bin/entrypoint.sh"
+    networks:
+      - dataplateu
+    restart: unless-stopped
+networks:
+  dataplateu:
+    name: dataplateu-networks
+    driver: bridge
+volumes:
+  sybase-data:
+     driver: local
